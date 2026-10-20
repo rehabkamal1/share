@@ -12,6 +12,11 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@shareflow/shared": ["../../packages/shared/src"],
+      "@shareflow/ui-tokens": ["../../packages/ui-tokens/src"]
+    },
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true
