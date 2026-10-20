@@ -10,8 +10,8 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@shareflow/shared': path.resolve(__dirname, '../../packages/shared/src'),
-      '@shareflow/ui-tokens': path.resolve(__dirname, '../../packages/ui-tokens/src'),
+      '@shareflow/shared': path.resolve(__dirname, 'src/shared'),
+      '@shareflow/ui-tokens': path.resolve(__dirname, 'src/ui-tokens'),
     },
   },
 });
