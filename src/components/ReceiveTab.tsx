@@ -17,10 +17,10 @@ interface ReceiveTabProps {
 export const ReceiveTab: React.FC<ReceiveTabProps> = ({ myDetails, pairedDevice }) => {
   const [copied, setCopied] = useState(false);
 
-  // QR Payload conforming to ShareFlow Protocol
+  // QR Payload conforming to CloudShare Protocol
   const qrPayload: QRPairingPayload = {
     v: '1.0',
-    type: 'shareflow_pair',
+    type: 'cloudshare_pair',
     id: myDetails.id,
     name: myDetails.name,
     deviceType: 'computer',
@@ -42,7 +42,7 @@ export const ReceiveTab: React.FC<ReceiveTabProps> = ({ myDetails, pairedDevice 
           استلام الملفات من الهاتف على الكمبيوتر
         </h2>
         <p style={{ fontSize: 14, color: 'var(--text-secondary)', maxWidth: 540, margin: '0 auto 24px', lineHeight: 1.5 }}>
-          افتح تطبيق ShareFlow على هاتفك، اختر "ربط مع الكمبيوتر" ثم امسح رمز الـ QR أدناه أو اكتب كود الـ PIN.
+          افتح تطبيق CloudShare على هاتفك، اختر "ربط مع الكمبيوتر" ثم امسح رمز الـ QR أدناه أو اكتب كود الـ PIN.
         </p>
 
         {pairedDevice ? (

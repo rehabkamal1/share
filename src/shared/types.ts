@@ -1,5 +1,5 @@
 /**
- * ShareFlow Shared Types & Transfer State Machine
+ * CloudShare Shared Types & Transfer State Machine
  */
 
 export type TransferStatus =

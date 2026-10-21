@@ -1,5 +1,5 @@
 /**
- * ShareFlow Design System & UI Tokens
+ * CloudShare Design System & UI Tokens
  * Modern, calm, soft lavender-blue aesthetic
  */
 

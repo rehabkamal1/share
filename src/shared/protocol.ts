@@ -1,5 +1,5 @@
 /**
- * ShareFlow Peer-to-Peer & Local Companion Transfer Protocol
+ * CloudShare Peer-to-Peer & Local Companion Transfer Protocol
  */
 
 import { DeviceInfo, SharedFileItem } from './types';
@@ -11,7 +11,7 @@ export const DEFAULT_EXPIRY_MINUTES = 60; // 1 hour default
 
 export interface QRPairingPayload {
   v: string;             // Protocol version e.g. "1.0"
-  type: 'shareflow_pair';
+  type: 'cloudshare_pair' | 'shareflow_pair';
   id: string;            // Device or session UUID
   name: string;          // Device friendly name
   deviceType: 'android' | 'computer' | 'web';

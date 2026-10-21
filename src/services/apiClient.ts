@@ -1,5 +1,5 @@
 /**
- * ShareFlow Cloud Link API Client
+ * CloudShare Cloud Link API Client
  */
 
 export interface CreateShareOptions {

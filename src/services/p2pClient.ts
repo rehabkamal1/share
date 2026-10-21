@@ -1,5 +1,5 @@
 /**
- * ShareFlow P2P WebRTC & WebSocket Local Transfer Engine for Browser Companion
+ * CloudShare P2P WebRTC & WebSocket Local Transfer Engine for Browser Companion
  */
 
 import {
@@ -59,7 +59,7 @@ export class P2PTransferEngine {
     return {
       id: this.peerId,
       pin: this.myPin,
-      name: 'متصفح الكمبيوتر (ShareFlow Companion)',
+      name: 'متصفح الكمبيوتر (CloudShare Companion)',
       deviceType: 'computer' as const,
       wsUrl: this.wsUrl,
     };
@@ -94,7 +94,7 @@ export class P2PTransferEngine {
               id: this.peerId,
               pin: this.myPin,
               deviceType: 'computer',
-              deviceName: 'متصفح الكمبيوتر (ShareFlow Companion)',
+              deviceName: 'متصفح الكمبيوتر (CloudShare Companion)',
             },
           })
         );
@@ -310,7 +310,7 @@ export class P2PTransferEngine {
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = curFile?.name || 'ShareFlow_file';
+      a.download = curFile?.name || 'CloudShare_file';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);

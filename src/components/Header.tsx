@@ -11,24 +11,22 @@ export const Header: React.FC<HeaderProps> = ({ onOpenHistory, isConnectedToHub 
     <header className="site-header">
       {/* Brand */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-        <div style={{
-          width: 38,
-          height: 38,
-          borderRadius: 12,
-          background: 'linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          boxShadow: '0 4px 12px rgba(118, 103, 201, 0.25)',
-          color: '#ffffff',
-          flexShrink: 0,
-        }}>
-          <Send size={19} style={{ transform: 'rotate(-45deg)' }} />
-        </div>
+        <img
+          src="/logo.png"
+          alt="CloudShare Logo"
+          style={{
+            width: 38,
+            height: 38,
+            borderRadius: 12,
+            boxShadow: '0 4px 12px rgba(40, 24, 87, 0.25)',
+            objectFit: 'cover',
+            flexShrink: 0,
+          }}
+        />
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <span style={{ fontSize: 20, fontWeight: 800, color: 'var(--text-main)', letterSpacing: -0.5 }}>
-              ShareFlow
+              CloudShare
             </span>
             <span style={{
               fontSize: 10,

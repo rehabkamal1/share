@@ -25,7 +25,7 @@ export const App: React.FC = () => {
   } | null>(null);
   const [history, setHistory] = useState<TransferHistoryItem[]>(() => {
     try {
-      const saved = localStorage.getItem('shareflow_history');
+      const saved = localStorage.getItem('cloudshare_history') || localStorage.getItem('shareflow_history');
       return saved ? JSON.parse(saved) : [];
     } catch {
       return [];
@@ -80,7 +80,7 @@ export const App: React.FC = () => {
 
         setHistory((prev) => {
           const next = [historyItem, ...prev].slice(0, 50);
-          localStorage.setItem('shareflow_history', JSON.stringify(next));
+          localStorage.setItem('cloudshare_history', JSON.stringify(next));
           return next;
         });
       }
@@ -119,6 +119,7 @@ export const App: React.FC = () => {
 
   const handleClearHistory = () => {
     setHistory([]);
+    localStorage.removeItem('cloudshare_history');
     localStorage.removeItem('shareflow_history');
   };
 
@@ -217,7 +218,7 @@ export const App: React.FC = () => {
         color: 'var(--text-secondary)',
         background: '#ffffff',
       }}>
-        <div>ShareFlow © 2026 — تطبيق مشاركة الملفات العصري والآمن بالعربية لنظام أندرويد والويب.</div>
+        <div>CloudShare © 2026 — تطبيق مشاركة الملفات العصري والآمن بالعربية لنظام أندرويد والويب.</div>
         <div style={{ marginTop: 4, color: 'var(--primary-dark)', fontWeight: 600 }}>
           نقل محلي فائق السرعة • خصوصية تامة • حماية مشفرة
         </div>

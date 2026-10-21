@@ -1,10 +1,10 @@
 /**
- * ShareFlow Arabic UI Strings & Localization (اللغة العربية بالكامل)
+ * CloudShare Arabic UI Strings & Localization (اللغة العربية بالكامل)
  */
 
 export const ar = {
   app: {
-    name: 'ShareFlow',
+    name: 'CloudShare',
     tagline: 'شارك ملفاتك بسهولة وأمان فائق',
     heroHeading: 'شارك ملفاتك، بكل سهولة وبدون سحاب.',
     heroSubheading: 'نقل محلي فائق السرعة بين الهواتف والحاسوب، أو عبر روابط مشفرة ومؤقتة.',
@@ -82,7 +82,7 @@ export const ar = {
   },
   companion: {
     title: 'الربط المباشر مع الكمبيوتر',
-    subtitle: 'افتح shareflow.app على متصفح جهازك وامسح الرمز أو أدخل رمز PIN',
+    subtitle: 'افتح cloudshare.app على متصفح جهازك وامسح الرمز أو أدخل رمز PIN',
     step1: '1. افتح المتصفح على جهاز الكمبيوتر الخاص بك',
     step2: '2. امسح رمز الـ QR أدناه بكاميرا هاتفك أو اكتب رمز التحقق',
     step3: '3. وافق على الاتصال وابدأ النقل فوراً بسرعة شبكتك المنزلية',
@@ -126,9 +126,9 @@ export const ar = {
     downloadsFolder: 'مجلد التنزيلات الافتراضي (Downloads)',
     privacyPolicy: 'سياسة الخصوصية والأمان',
     privacyDesc: 'نحن نضمن أن الملفات المنقولة محلياً لا تمر عبر أي خادم سحابي وتبقى داخل شبكتك المنزلية بالكامل.',
-    about: 'عن تطبيق ShareFlow',
+    about: 'عن تطبيق CloudShare',
     version: 'الإصدار 1.0.0 (نسخة الإنتاج)',
-    developer: 'فريق تطوير ShareFlow',
+    developer: 'فريق تطوير CloudShare',
     clearHistory: 'مسح سجل التحويلات',
     confirmClearHistory: 'هل أنت متأكد من رغبتك في حذف سجل التحويلات بالكامل؟',
   },
