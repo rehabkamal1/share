@@ -81,39 +81,31 @@ export const DownloadLinkTab: React.FC<DownloadLinkTabProps> = ({ initialToken }
 
   return (
     <div style={{ maxWidth: 760, margin: '0 auto' }}>
-      <div style={{
-        background: 'var(--surface)',
-        borderRadius: 'var(--radius-card)',
-        padding: '36px 32px',
-        border: '1px solid var(--border)',
-        boxShadow: 'var(--shadow-card)',
-      }}>
-        <div style={{ textAlign: 'center', marginBottom: 28 }}>
+      <div className="responsive-card">
+        <div style={{ textAlign: 'center', marginBottom: 24 }}>
           <div style={{
-            width: 48,
-            height: 48,
-            borderRadius: 16,
+            width: 44,
+            height: 44,
+            borderRadius: 14,
             background: 'var(--accent-blue)',
             display: 'inline-flex',
             alignItems: 'center',
             justifyContent: 'center',
             color: '#1E40AF',
-            marginBottom: 12,
+            marginBottom: 10,
           }}>
-            <Download size={26} />
+            <Download size={24} />
           </div>
-          <h2 style={{ fontSize: 24, fontWeight: 800, color: 'var(--text-main)', marginBottom: 6 }}>
+          <h2 style={{ fontSize: 22, fontWeight: 800, color: 'var(--text-main)', marginBottom: 6 }}>
             تحميل الملفات المشتركة
           </h2>
-          <p style={{ fontSize: 14, color: 'var(--text-secondary)' }}>
+          <p style={{ fontSize: 13, color: 'var(--text-secondary)' }}>
             أدخل رمز المشاركة أو الصق الرابط للوصول للملفات وتحميلها
           </p>
         </div>
 
         {/* Search / Token Input Form */}
-        <div style={{
-          display: 'flex',
-          gap: 10,
+        <div className="responsive-form-row" style={{
           marginBottom: 24,
           maxWidth: 580,
           margin: '0 auto 24px',
@@ -125,7 +117,7 @@ export const DownloadLinkTab: React.FC<DownloadLinkTabProps> = ({ initialToken }
             onChange={(e) => setTokenInput(e.target.value)}
             style={{
               flex: 1,
-              padding: '12px 18px',
+              padding: '11px 16px',
               borderRadius: 'var(--radius-button)',
               fontSize: 14,
             }}
@@ -134,12 +126,13 @@ export const DownloadLinkTab: React.FC<DownloadLinkTabProps> = ({ initialToken }
             onClick={() => loadShare(tokenInput)}
             disabled={!tokenInput.trim() || isLoading}
             style={{
-              padding: '12px 24px',
+              padding: '11px 22px',
               borderRadius: 'var(--radius-button)',
               background: 'var(--primary)',
               color: '#ffffff',
               fontSize: 14,
               fontWeight: 700,
+              whiteSpace: 'nowrap',
             }}
           >
             {isLoading ? 'جاري الفحص...' : 'فتح الرابط'}
@@ -212,7 +205,7 @@ export const DownloadLinkTab: React.FC<DownloadLinkTabProps> = ({ initialToken }
                   يرجى كتابة كلمة المرور المحددة من قبل المرسل لفك التشفير والتحميل
                 </p>
 
-                <div style={{ display: 'flex', gap: 10, maxWidth: 360, margin: '0 auto' }}>
+                <div className="responsive-form-row" style={{ maxWidth: 360, margin: '0 auto' }}>
                   <input
                     type="password"
                     placeholder="كلمة المرور"
@@ -236,6 +229,7 @@ export const DownloadLinkTab: React.FC<DownloadLinkTabProps> = ({ initialToken }
                       fontWeight: 700,
                       display: 'flex',
                       alignItems: 'center',
+                      justifyContent: 'center',
                       gap: 6,
                     }}
                   >
@@ -261,14 +255,15 @@ export const DownloadLinkTab: React.FC<DownloadLinkTabProps> = ({ initialToken }
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between',
-                        padding: '12px 16px',
+                        padding: '12px 14px',
                         borderBottom: i < shareData.files.length - 1 ? '1px solid var(--border)' : 'none',
+                        gap: 10,
                       }}
                     >
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                        <FileText size={18} color="var(--primary)" />
-                        <div>
-                          <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-main)' }}>{f.name}</div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 10, flex: 1, minWidth: 0 }}>
+                        <FileText size={18} color="var(--primary)" style={{ flexShrink: 0 }} />
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div className="responsive-file-name">{f.name}</div>
                           <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>{formatBytes(f.size)}</div>
                         </div>
                       </div>
@@ -285,6 +280,7 @@ export const DownloadLinkTab: React.FC<DownloadLinkTabProps> = ({ initialToken }
                           display: 'flex',
                           alignItems: 'center',
                           gap: 6,
+                          flexShrink: 0,
                         }}
                       >
                         <Download size={14} />
@@ -297,21 +293,19 @@ export const DownloadLinkTab: React.FC<DownloadLinkTabProps> = ({ initialToken }
                 <div style={{ textAlign: 'center' }}>
                   <button
                     onClick={handleDownloadAll}
+                    className="responsive-btn"
                     style={{
                       padding: '14px 36px',
                       borderRadius: 'var(--radius-button)',
                       background: 'var(--primary)',
                       color: '#ffffff',
-                      fontSize: 16,
+                      fontSize: 15,
                       fontWeight: 700,
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: 10,
                       boxShadow: '0 6px 20px rgba(118, 103, 201, 0.3)',
                     }}
                   >
                     <Archive size={18} />
-                    <span>تحميل جميع الملفات (ملف مضغوط ZIP)</span>
+                    <span>تحميل جميع الملفات (ZIP)</span>
                   </button>
                 </div>
               </div>

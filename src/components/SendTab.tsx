@@ -51,12 +51,7 @@ export const SendTab: React.FC<SendTabProps> = ({ pairedDevice, onSendFiles, onR
   return (
     <div style={{ maxWidth: 840, margin: '0 auto' }}>
       {/* Device Pairing Bar */}
-      <div style={{
-        padding: '16px 20px',
-        borderRadius: 'var(--radius-card)',
-        background: 'var(--surface)',
-        border: '1px solid var(--border)',
-        boxShadow: 'var(--shadow-subtle)',
+      <div className="responsive-card" style={{
         marginBottom: 24,
         display: 'flex',
         alignItems: 'center',
@@ -64,7 +59,7 @@ export const SendTab: React.FC<SendTabProps> = ({ pairedDevice, onSendFiles, onR
         flexWrap: 'wrap',
         gap: 16,
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, flex: '1 1 280px' }}>
           <div style={{
             width: 40,
             height: 40,
@@ -74,6 +69,7 @@ export const SendTab: React.FC<SendTabProps> = ({ pairedDevice, onSendFiles, onR
             alignItems: 'center',
             justifyContent: 'center',
             color: pairedDevice ? 'var(--success)' : 'var(--primary)',
+            flexShrink: 0,
           }}>
             <Smartphone size={22} />
           </div>
@@ -90,14 +86,14 @@ export const SendTab: React.FC<SendTabProps> = ({ pairedDevice, onSendFiles, onR
         </div>
 
         {!pairedDevice && (
-          <form onSubmit={handlePairSubmit} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <form onSubmit={handlePairSubmit} className="responsive-form-row" style={{ flex: '1 1 auto', justifyContent: 'flex-end' }}>
             <input
               type="text"
               placeholder="رمز PIN (مثال: 481920)"
               value={targetPin}
               onChange={(e) => setTargetPin(e.target.value)}
               style={{
-                padding: '8px 14px',
+                padding: '9px 14px',
                 borderRadius: 'var(--radius-button)',
                 fontSize: 14,
                 width: 170,
@@ -109,7 +105,7 @@ export const SendTab: React.FC<SendTabProps> = ({ pairedDevice, onSendFiles, onR
               type="submit"
               disabled={!targetPin.trim()}
               style={{
-                padding: '8px 18px',
+                padding: '9px 20px',
                 borderRadius: 'var(--radius-button)',
                 background: 'var(--primary)',
                 color: '#ffffff',
@@ -140,7 +136,7 @@ export const SendTab: React.FC<SendTabProps> = ({ pairedDevice, onSendFiles, onR
         style={{
           border: `2px dashed ${isDragging ? 'var(--primary)' : 'var(--border)'}`,
           borderRadius: 'var(--radius-card)',
-          padding: '48px 24px',
+          padding: '36px 16px',
           textAlign: 'center',
           background: isDragging ? 'var(--primary-soft)' : 'var(--surface)',
           cursor: 'pointer',
@@ -156,23 +152,23 @@ export const SendTab: React.FC<SendTabProps> = ({ pairedDevice, onSendFiles, onR
           style={{ display: 'none' }}
         />
         <div style={{
-          width: 64,
-          height: 64,
-          borderRadius: 20,
+          width: 56,
+          height: 56,
+          borderRadius: 18,
           background: 'var(--primary-soft)',
           color: 'var(--primary)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          margin: '0 auto 16px',
+          margin: '0 auto 14px',
         }}>
-          <UploadCloud size={32} />
+          <UploadCloud size={28} />
         </div>
-        <h3 style={{ fontSize: 18, fontWeight: 700, color: 'var(--text-main)', marginBottom: 8 }}>
-          اسحب الملفات وأفلتها هنا، أو اضغط للاختيار من الكمبيوتر
+        <h3 style={{ fontSize: 17, fontWeight: 700, color: 'var(--text-main)', marginBottom: 6 }}>
+          اضغط لاختيار الملفات أو اسحبها وأفلتها هنا
         </h3>
-        <p style={{ fontSize: 14, color: 'var(--text-secondary)' }}>
-          يدعم جميع الصور، الفيديوهات عالية الدقة، المستندات، والملفات المضغوطة بدون حد أقصى
+        <p style={{ fontSize: 13, color: 'var(--text-secondary)' }}>
+          يدعم جميع الصور، الفيديوهات عالية الدقة، المستندات، والملفات المضغوطة
         </p>
       </div>
 
@@ -184,11 +180,13 @@ export const SendTab: React.FC<SendTabProps> = ({ pairedDevice, onSendFiles, onR
             alignItems: 'center',
             justifyContent: 'space-between',
             marginBottom: 12,
+            flexWrap: 'wrap',
+            gap: 8,
           }}>
-            <div style={{ fontSize: 16, fontWeight: 700, color: 'var(--text-main)' }}>
+            <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--text-main)' }}>
               الملفات المختارة ({selectedFiles.length})
             </div>
-            <div style={{ fontSize: 14, color: 'var(--primary-dark)', fontWeight: 600 }}>
+            <div style={{ fontSize: 13, color: 'var(--primary-dark)', fontWeight: 600 }}>
               الحجم الإجمالي: {formatBytes(totalBytes)}
             </div>
           </div>
@@ -208,23 +206,25 @@ export const SendTab: React.FC<SendTabProps> = ({ pairedDevice, onSendFiles, onR
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  padding: '10px 14px',
+                  padding: '10px 12px',
                   borderRadius: 'var(--radius-sm)',
                   background: idx % 2 === 0 ? 'var(--secondary-surface)' : 'transparent',
+                  gap: 8,
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, overflow: 'hidden' }}>
-                  <File size={18} color="var(--primary)" />
-                  <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-main)', textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap', maxWidth: 420 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, flex: 1, minWidth: 0, overflow: 'hidden' }}>
+                  <File size={18} color="var(--primary)" style={{ flexShrink: 0 }} />
+                  <span className="responsive-file-name">
                     {file.name}
                   </span>
-                  <span style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
+                  <span style={{ fontSize: 12, color: 'var(--text-secondary)', flexShrink: 0 }}>
                     ({formatBytes(file.size)})
                   </span>
                 </div>
                 <button
                   onClick={(e) => { e.stopPropagation(); removeFile(idx); }}
-                  style={{ background: 'transparent', color: 'var(--error)', padding: 4, borderRadius: 6 }}
+                  style={{ background: 'transparent', color: 'var(--error)', padding: 6, borderRadius: 6, flexShrink: 0 }}
+                  title="حذف الملف"
                 >
                   <Trash2 size={16} />
                 </button>
@@ -236,15 +236,13 @@ export const SendTab: React.FC<SendTabProps> = ({ pairedDevice, onSendFiles, onR
             <button
               onClick={handleSend}
               disabled={!pairedDevice}
+              className="responsive-btn"
               style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 10,
                 padding: '14px 40px',
                 borderRadius: 'var(--radius-button)',
                 background: pairedDevice ? 'var(--primary)' : '#CBD5E1',
                 color: '#ffffff',
-                fontSize: 16,
+                fontSize: 15,
                 fontWeight: 700,
                 boxShadow: pairedDevice ? '0 6px 20px rgba(118, 103, 201, 0.35)' : 'none',
                 cursor: pairedDevice ? 'pointer' : 'not-allowed',

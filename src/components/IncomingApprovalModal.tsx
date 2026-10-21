@@ -16,29 +16,11 @@ export const IncomingApprovalModal: React.FC<IncomingApprovalModalProps> = ({ of
   if (!offer) return null;
 
   return (
-    <div style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      background: 'rgba(41, 40, 58, 0.65)',
-      backdropFilter: 'blur(8px)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      zIndex: 110,
-      padding: 16,
-    }}>
-      <div style={{
-        background: '#ffffff',
-        borderRadius: 'var(--radius-card)',
-        padding: '32px 28px',
-        width: '100%',
+    <div className="modal-overlay">
+      <div className="modal-content animate-fade-in" style={{
         maxWidth: 480,
-        boxShadow: 'var(--shadow-float)',
         textAlign: 'center',
-      }} className="animate-fade-in">
+      }}>
         <div style={{
           width: 56,
           height: 56,

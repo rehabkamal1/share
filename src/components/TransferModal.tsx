@@ -18,30 +18,11 @@ export const TransferModal: React.FC<TransferModalProps> = ({ progress, onCancel
   const isTransferring = progress.status === 'transferring';
 
   return (
-    <div style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      background: 'rgba(41, 40, 58, 0.6)',
-      backdropFilter: 'blur(8px)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      zIndex: 100,
-      padding: 16,
-    }}>
-      <div style={{
-        background: '#ffffff',
-        borderRadius: 'var(--radius-card)',
-        padding: '36px 32px',
-        width: '100%',
+    <div className="modal-overlay">
+      <div className="modal-content animate-fade-in" style={{
         maxWidth: 520,
-        boxShadow: 'var(--shadow-float)',
         textAlign: 'center',
-        position: 'relative',
-      }} className="animate-fade-in">
+      }}>
         {/* Status Icon */}
         <div style={{ margin: '0 auto 16px' }}>
           {isTransferring && (

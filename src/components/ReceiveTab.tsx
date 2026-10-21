@@ -37,45 +37,42 @@ export const ReceiveTab: React.FC<ReceiveTabProps> = ({ myDetails, pairedDevice 
 
   return (
     <div style={{ maxWidth: 760, margin: '0 auto', textAlign: 'center' }}>
-      <div style={{
-        background: 'var(--surface)',
-        borderRadius: 'var(--radius-card)',
-        padding: '36px 32px',
-        border: '1px solid var(--border)',
-        boxShadow: 'var(--shadow-card)',
-      }}>
-        <h2 style={{ fontSize: 24, fontWeight: 800, color: 'var(--text-main)', marginBottom: 8 }}>
+      <div className="responsive-card">
+        <h2 style={{ fontSize: 22, fontWeight: 800, color: 'var(--text-main)', marginBottom: 8 }}>
           استلام الملفات من الهاتف على الكمبيوتر
         </h2>
-        <p style={{ fontSize: 15, color: 'var(--text-secondary)', maxWidth: 540, margin: '0 auto 28px' }}>
+        <p style={{ fontSize: 14, color: 'var(--text-secondary)', maxWidth: 540, margin: '0 auto 24px', lineHeight: 1.5 }}>
           افتح تطبيق ShareFlow على هاتفك، اختر "ربط مع الكمبيوتر" ثم امسح رمز الـ QR أدناه أو اكتب كود الـ PIN.
         </p>
 
         {pairedDevice ? (
           <div style={{
-            padding: '24px',
+            padding: '20px 16px',
             borderRadius: 'var(--radius-card)',
             background: 'var(--accent-mint)',
             color: 'var(--success)',
-            display: 'inline-flex',
+            display: 'flex',
             alignItems: 'center',
-            gap: 16,
+            gap: 14,
             marginBottom: 24,
+            textAlign: 'right',
+            width: '100%',
           }}>
             <div style={{
-              width: 48,
-              height: 48,
-              borderRadius: 16,
+              width: 44,
+              height: 44,
+              borderRadius: 14,
               background: '#ffffff',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
+              flexShrink: 0,
             }}>
-              <CheckCircle size={28} color="var(--success)" />
+              <CheckCircle size={24} color="var(--success)" />
             </div>
-            <div style={{ textAlign: 'right' }}>
-              <div style={{ fontSize: 18, fontWeight: 700 }}>متصل بالهاتف: {pairedDevice.name}</div>
-              <div style={{ fontSize: 14 }}>أنت جاهز الآن، يمكنك إرسال أي ملف من هاتفك ليتم حفظه تلقائياً في التنزيلات.</div>
+            <div>
+              <div style={{ fontSize: 16, fontWeight: 700 }}>متصل بالهاتف: {pairedDevice.name}</div>
+              <div style={{ fontSize: 13, marginTop: 2 }}>أنت جاهز الآن، يمكنك إرسال أي ملف من هاتفك ليتم حفظه تلقائياً في التنزيلات.</div>
             </div>
           </div>
         ) : (
@@ -83,38 +80,39 @@ export const ReceiveTab: React.FC<ReceiveTabProps> = ({ myDetails, pairedDevice 
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: 40,
+            gap: 28,
             flexWrap: 'wrap',
-            margin: '20px 0 32px',
+            margin: '16px 0 24px',
           }}>
             {/* QR Code Container */}
             <div style={{
-              padding: 20,
+              padding: 16,
               background: '#ffffff',
               borderRadius: 'var(--radius-card)',
               border: '2px solid var(--primary-soft)',
               boxShadow: 'var(--shadow-subtle)',
               display: 'inline-block',
+              maxWidth: '100%',
             }}>
               <QRCodeSVG
                 value={JSON.stringify(qrPayload)}
-                size={210}
+                size={180}
                 level="M"
                 includeMargin={false}
               />
-              <div style={{ marginTop: 12, fontSize: 13, fontWeight: 600, color: 'var(--primary-dark)' }}>
+              <div style={{ marginTop: 10, fontSize: 13, fontWeight: 600, color: 'var(--primary-dark)' }}>
                 امسح الرمز بكاميرا التطبيق
               </div>
             </div>
 
             {/* PIN Code Box */}
-            <div style={{ textAlign: 'right', minWidth: 260 }}>
+            <div style={{ textAlign: 'center', width: '100%', maxWidth: 300 }}>
               <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-secondary)' }}>
                 أو أدخل رمز التحقق اليدوي (PIN):
               </span>
               <div style={{
-                margin: '12px 0',
-                padding: '16px 24px',
+                margin: '12px auto',
+                padding: '14px 20px',
                 borderRadius: 'var(--radius-button)',
                 background: 'var(--secondary-surface)',
                 border: '1px solid var(--border)',
@@ -123,7 +121,7 @@ export const ReceiveTab: React.FC<ReceiveTabProps> = ({ myDetails, pairedDevice 
                 justifyContent: 'space-between',
               }}>
                 <span style={{
-                  fontSize: 32,
+                  fontSize: 28,
                   fontWeight: 800,
                   color: 'var(--primary-dark)',
                   letterSpacing: 4,
@@ -138,7 +136,7 @@ export const ReceiveTab: React.FC<ReceiveTabProps> = ({ myDetails, pairedDevice 
                     background: '#ffffff',
                     border: '1px solid var(--border)',
                     padding: 8,
-                    borderRadius: 8,
+                    borderRadius: 10,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',

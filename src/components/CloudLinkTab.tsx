@@ -89,13 +89,7 @@ export const CloudLinkTab: React.FC = () => {
 
   return (
     <div style={{ maxWidth: 800, margin: '0 auto' }}>
-      <div style={{
-        background: 'var(--surface)',
-        borderRadius: 'var(--radius-card)',
-        padding: '36px 32px',
-        border: '1px solid var(--border)',
-        boxShadow: 'var(--shadow-card)',
-      }}>
+      <div className="responsive-card">
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
           <div style={{
             width: 40,
@@ -106,14 +100,15 @@ export const CloudLinkTab: React.FC = () => {
             alignItems: 'center',
             justifyContent: 'center',
             color: 'var(--primary)',
+            flexShrink: 0,
           }}>
             <Link2 size={22} />
           </div>
           <div>
-            <h2 style={{ fontSize: 22, fontWeight: 800, color: 'var(--text-main)' }}>
+            <h2 style={{ fontSize: 20, fontWeight: 800, color: 'var(--text-main)' }}>
               مشاركة الملفات عبر رابط سحابي آمن
             </h2>
-            <p style={{ fontSize: 14, color: 'var(--text-secondary)' }}>
+            <p style={{ fontSize: 13, color: 'var(--text-secondary)' }}>
               ارفع ملفاتك وشاركها مع أي شخص في العالم برابط مشفر ينتهي تلقائياً
             </p>
           </div>
@@ -157,11 +152,8 @@ export const CloudLinkTab: React.FC = () => {
             </p>
 
             {/* Link Copy Box */}
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 12,
-              padding: '12px 18px',
+            <div className="responsive-form-row" style={{
+              padding: '10px 14px',
               borderRadius: 'var(--radius-button)',
               background: 'var(--secondary-surface)',
               border: '1px solid var(--border)',
@@ -176,13 +168,14 @@ export const CloudLinkTab: React.FC = () => {
                   flex: 1,
                   background: 'transparent',
                   border: 'none',
-                  fontSize: 14,
+                  fontSize: 13,
                   fontWeight: 600,
                   direction: 'ltr',
                   textAlign: 'left',
                   color: 'var(--primary-dark)',
                   outline: 'none',
                   boxShadow: 'none',
+                  minWidth: 0,
                 }}
               />
               <button
@@ -196,7 +189,9 @@ export const CloudLinkTab: React.FC = () => {
                   fontWeight: 700,
                   display: 'flex',
                   alignItems: 'center',
+                  justifyContent: 'center',
                   gap: 6,
+                  flexShrink: 0,
                 }}
               >
                 {copied ? <Check size={16} /> : <Copy size={16} />}
@@ -204,7 +199,7 @@ export const CloudLinkTab: React.FC = () => {
               </button>
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'center', gap: 16, marginBottom: 24 }}>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: 12, marginBottom: 24, flexWrap: 'wrap' }}>
               <button
                 onClick={() => setShowQr(!showQr)}
                 style={{
@@ -416,18 +411,21 @@ export const CloudLinkTab: React.FC = () => {
               <button
                 onClick={handleCreateShare}
                 disabled={isUploading || files.length === 0}
+                className="responsive-btn"
                 style={{
                   padding: '14px 40px',
                   borderRadius: 'var(--radius-button)',
                   background: 'var(--primary)',
                   color: '#ffffff',
-                  fontSize: 16,
+                  fontSize: 15,
                   fontWeight: 700,
                   opacity: isUploading || files.length === 0 ? 0.6 : 1,
                   boxShadow: '0 6px 20px rgba(118, 103, 201, 0.3)',
+                  cursor: isUploading || files.length === 0 ? 'not-allowed' : 'pointer',
                 }}
               >
-                {isUploading ? 'جاري الرفع والمعالجة...' : 'توليد رابط المشاركة المشفر'}
+                <Upload size={18} />
+                <span>{isUploading ? 'جاري الرفع والمعالجة...' : 'توليد رابط المشاركة المشفر'}</span>
               </button>
             </div>
           </div>

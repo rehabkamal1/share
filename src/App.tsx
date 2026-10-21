@@ -136,17 +136,11 @@ export const App: React.FC = () => {
         isConnectedToHub={true}
       />
 
-      <main style={{ flex: 1, padding: '0 24px 64px' }}>
+      <main className="main-content">
         <Hero />
 
         {/* Tab Selector Navigation */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'center',
-          gap: 8,
-          marginBottom: 32,
-          flexWrap: 'wrap',
-        }}>
+        <div className="tab-nav-container">
           {tabs.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -154,19 +148,12 @@ export const App: React.FC = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
+                className="tab-nav-btn"
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 8,
-                  padding: '12px 24px',
-                  borderRadius: 'var(--radius-button)',
                   background: isActive ? 'var(--primary)' : 'var(--surface)',
                   color: isActive ? '#ffffff' : 'var(--text-main)',
-                  fontSize: 15,
-                  fontWeight: 700,
                   boxShadow: isActive ? '0 4px 16px rgba(118, 103, 201, 0.3)' : 'var(--shadow-subtle)',
                   border: `1px solid ${isActive ? 'var(--primary)' : 'var(--border)'}`,
-                  transition: 'all 0.2s ease',
                 }}
               >
                 <Icon size={18} style={tab.id === 'send' ? { transform: 'rotate(-45deg)' } : undefined} />

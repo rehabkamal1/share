@@ -13,33 +13,15 @@ export const HistoryModal: React.FC<HistoryModalProps> = ({ isOpen, onClose, his
   if (!isOpen) return null;
 
   return (
-    <div style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      background: 'rgba(41, 40, 58, 0.6)',
-      backdropFilter: 'blur(8px)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      zIndex: 100,
-      padding: 16,
-    }}>
-      <div style={{
-        background: '#ffffff',
-        borderRadius: 'var(--radius-card)',
-        padding: '32px 28px',
-        width: '100%',
+    <div className="modal-overlay">
+      <div className="modal-content animate-fade-in" style={{
         maxWidth: 580,
-        boxShadow: 'var(--shadow-float)',
         maxHeight: '85vh',
         display: 'flex',
         flexDirection: 'column',
-      }} className="animate-fade-in">
+      }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
-          <h3 style={{ fontSize: 20, fontWeight: 800, color: 'var(--text-main)' }}>
+          <h3 style={{ fontSize: 18, fontWeight: 800, color: 'var(--text-main)' }}>
             سجل عمليات النقل
           </h3>
           <button onClick={onClose} style={{ background: 'transparent', color: 'var(--text-secondary)' }}>
@@ -60,16 +42,17 @@ export const HistoryModal: React.FC<HistoryModalProps> = ({ isOpen, onClose, his
                 <div
                   key={item.id}
                   style={{
-                    padding: '12px 16px',
+                    padding: '12px 14px',
                     borderRadius: 'var(--radius-sm)',
                     background: 'var(--bg-main)',
                     border: '1px solid var(--border)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
+                    gap: 10,
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, flex: 1, minWidth: 0 }}>
                     <div style={{
                       width: 36,
                       height: 36,
@@ -79,13 +62,14 @@ export const HistoryModal: React.FC<HistoryModalProps> = ({ isOpen, onClose, his
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
+                      flexShrink: 0,
                     }}>
                       {item.direction === 'outgoing' ? <ArrowUpRight size={18} /> : <ArrowDownLeft size={18} />}
                     </div>
-                    <div>
-                      <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-main)' }}>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div className="responsive-file-name">
                         {item.files[0]?.name || 'ملف'}
-                        {item.filesCount > 1 && ` (+${item.filesCount - 1} ملفات)`}
+                        {item.filesCount > 1 && ` (+${item.filesCount - 1})`}
                       </div>
                       <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
                         {item.direction === 'outgoing' ? 'إرسال إلى' : 'استلام من'}: {item.peerName} • {formatBytes(item.totalSize)}

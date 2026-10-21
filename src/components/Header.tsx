@@ -8,100 +8,91 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ onOpenHistory, isConnectedToHub }) => {
   return (
-    <header style={{
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      padding: '16px 32px',
-      background: 'rgba(255, 255, 255, 0.85)',
-      backdropFilter: 'blur(12px)',
-      borderBottom: '1px solid var(--border)',
-      position: 'sticky',
-      top: 0,
-      zIndex: 40,
-    }}>
+    <header className="site-header">
       {/* Brand */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
         <div style={{
-          width: 44,
-          height: 44,
-          borderRadius: 14,
+          width: 38,
+          height: 38,
+          borderRadius: 12,
           background: 'linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           boxShadow: '0 4px 12px rgba(118, 103, 201, 0.25)',
           color: '#ffffff',
+          flexShrink: 0,
         }}>
-          <Send size={22} style={{ transform: 'rotate(-45deg)' }} />
+          <Send size={19} style={{ transform: 'rotate(-45deg)' }} />
         </div>
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={{ fontSize: 22, fontWeight: 800, color: 'var(--text-main)', letterSpacing: -0.5 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <span style={{ fontSize: 20, fontWeight: 800, color: 'var(--text-main)', letterSpacing: -0.5 }}>
               ShareFlow
             </span>
             <span style={{
-              fontSize: 11,
+              fontSize: 10,
               fontWeight: 700,
               background: 'var(--primary-soft)',
               color: 'var(--primary-dark)',
-              padding: '2px 8px',
+              padding: '2px 7px',
               borderRadius: 20,
             }}>
-              الكمبيوتر
+              الويب
             </span>
           </div>
-          <span style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
-            مشاركة الملفات بسرعة وأمان فائق
+          <span className="hide-on-small" style={{ fontSize: 11, color: 'var(--text-secondary)' }}>
+            مشاركة سريعة وآمنة
           </span>
         </div>
       </div>
 
       {/* Status & Actions */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          gap: '8px',
-          padding: '6px 14px',
+          gap: '6px',
+          padding: '6px 10px',
           borderRadius: 20,
           background: isConnectedToHub ? 'var(--accent-mint)' : '#FEE2E2',
           color: isConnectedToHub ? 'var(--success)' : 'var(--error)',
-          fontSize: 13,
+          fontSize: 12,
           fontWeight: 600,
         }}>
-          <Wifi size={15} />
-          <span>{isConnectedToHub ? 'الشبكة المحلية جاهزة' : 'جاري الاتصال بالشبكة'}</span>
+          <Wifi size={14} />
+          <span className="hide-on-small">{isConnectedToHub ? 'الشبكة جاهزة' : 'جاري الاتصال'}</span>
         </div>
 
         <button
           onClick={onOpenHistory}
+          title="سجل النقل"
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '8px',
-            padding: '8px 16px',
+            gap: '6px',
+            padding: '7px 12px',
             borderRadius: 'var(--radius-button)',
             background: 'var(--secondary-surface)',
             color: 'var(--text-main)',
-            fontSize: 14,
+            fontSize: 13,
             fontWeight: 600,
           }}
         >
-          <History size={16} />
-          <span>سجل النقل</span>
+          <History size={15} />
+          <span className="hide-on-mobile">سجل النقل</span>
         </button>
 
-        <div style={{
+        <div className="hide-on-mobile" style={{
           display: 'flex',
           alignItems: 'center',
           gap: '6px',
           color: 'var(--primary)',
           fontSize: 13,
           fontWeight: 600,
-          padding: '0 8px',
+          padding: '0 4px',
         }}>
-          <ShieldCheck size={18} />
+          <ShieldCheck size={17} />
           <span>خصوصية 100%</span>
         </div>
       </div>
