@@ -14,22 +14,34 @@ interface ReceiveTabProps {
   pairedDevice: DeviceInfo | null;
 }
 
+const isLocalHostname = (host: string) => {
+  return (
+    host === 'localhost' ||
+    host === '127.0.0.1' ||
+    host.startsWith('192.168.') ||
+    host.startsWith('10.') ||
+    host.startsWith('172.') ||
+    host.endsWith('.local')
+  );
+};
+
 export const ReceiveTab: React.FC<ReceiveTabProps> = ({ myDetails, pairedDevice }) => {
   const [copied, setCopied] = useState(false);
+  const isOnCloud = typeof window !== 'undefined' && !isLocalHostname(window.location.hostname);
   const [customIp, setCustomIp] = useState(() => {
-    return (
-      localStorage.getItem('cloudshare_lan_ip') ||
-      (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1'
-        ? window.location.hostname
-        : '')
-    );
+    const saved = localStorage.getItem('cloudshare_lan_ip');
+    if (saved) return saved;
+    if (typeof window !== 'undefined' && isLocalHostname(window.location.hostname) && window.location.hostname !== 'localhost') {
+      return window.location.hostname;
+    }
+    return '';
   });
   const [tempIp, setTempIp] = useState(customIp);
-  const [showIpConfig, setShowIpConfig] = useState(false);
+  const [showIpConfig, setShowIpConfig] = useState(isOnCloud && !customIp);
 
   const effectiveWsUrl = customIp.trim()
     ? `ws://${customIp.trim()}:4000/ws/signaling`
-    : myDetails.wsUrl;
+    : (isOnCloud ? 'ws://localhost:4000/ws/signaling' : myDetails.wsUrl);
 
   // QR Payload conforming to CloudShare Protocol
   const qrPayload: QRPairingPayload = {
@@ -211,7 +223,7 @@ export const ReceiveTab: React.FC<ReceiveTabProps> = ({ myDetails, pairedDevice 
               <Wifi size={16} color="var(--primary)" />
               <span>عنوان اللابتوب في الشبكة (LAN IP):</span>
               <strong style={{ color: 'var(--text-main)', direction: 'ltr' }}>
-                {customIp || (typeof window !== 'undefined' ? window.location.hostname : 'localhost')}
+                {customIp || (typeof window !== 'undefined' && isLocalHostname(window.location.hostname) ? window.location.hostname : 'لم يتم التحديد')}
               </strong>
             </div>
             <button
@@ -232,6 +244,21 @@ export const ReceiveTab: React.FC<ReceiveTabProps> = ({ myDetails, pairedDevice 
               <span>{showIpConfig ? 'إغلاق' : 'تعديل الـ IP'}</span>
             </button>
           </div>
+
+          {isOnCloud && !customIp && (
+            <div style={{
+              fontSize: 12,
+              color: '#B45309',
+              background: '#FEF3C7',
+              padding: '8px 12px',
+              borderRadius: 8,
+              textAlign: 'right',
+              width: '100%',
+              lineHeight: 1.5,
+            }}>
+              💡 أنت تتصفح من Vercel. للاقتران المباشر مع هاتفك عبر الواي فاي، أدخل عنوان IP اللابتوب أدناه (مثال: 192.168.1.15) بعد تشغيل السيرفر المحلي (<code style={{ direction: 'ltr' }}>npm run dev:api</code>).
+            </div>
+          )}
 
           {showIpConfig && (
             <div style={{ width: '100%', display: 'flex', gap: 8, marginTop: 6 }}>

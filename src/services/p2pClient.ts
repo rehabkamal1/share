@@ -18,10 +18,26 @@ export type IncomingTransferCallback = (
   reject: () => void
 ) => void;
 
+const isLocalHostname = (host: string) => {
+  return (
+    host === 'localhost' ||
+    host === '127.0.0.1' ||
+    host.startsWith('192.168.') ||
+    host.startsWith('10.') ||
+    host.startsWith('172.') ||
+    host.endsWith('.local')
+  );
+};
+
 const getDefaultWsUrl = () => {
-  if (typeof window !== 'undefined' && window.location.hostname) {
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    return `${protocol}//${window.location.hostname}:4000/ws/signaling`;
+  if (typeof window !== 'undefined') {
+    if ((import.meta as any).env?.VITE_WS_URL) {
+      return (import.meta as any).env.VITE_WS_URL;
+    }
+    const host = window.location.hostname;
+    if (isLocalHostname(host)) {
+      return `ws://${host}:4000/ws/signaling`;
+    }
   }
   return 'ws://localhost:4000/ws/signaling';
 };

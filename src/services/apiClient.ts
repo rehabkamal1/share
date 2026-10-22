@@ -28,10 +28,26 @@ export interface ShareMetadataResponse {
   maxDownloads: number;
 }
 
+const isLocalHostname = (host: string) => {
+  return (
+    host === 'localhost' ||
+    host === '127.0.0.1' ||
+    host.startsWith('192.168.') ||
+    host.startsWith('10.') ||
+    host.startsWith('172.') ||
+    host.endsWith('.local')
+  );
+};
+
 const getDefaultApiUrl = () => {
-  if (typeof window !== 'undefined' && window.location.hostname) {
-    const protocol = window.location.protocol === 'https:' ? 'https:' : 'http:';
-    return `${protocol}//${window.location.hostname}:4000/api`;
+  if (typeof window !== 'undefined') {
+    if ((import.meta as any).env?.VITE_API_URL) {
+      return (import.meta as any).env.VITE_API_URL;
+    }
+    const host = window.location.hostname;
+    if (isLocalHostname(host)) {
+      return `http://${host}:4000/api`;
+    }
   }
   return 'http://localhost:4000/api';
 };
