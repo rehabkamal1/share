@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { UploadCloud, File, Trash2, Smartphone, Send, CheckCircle2 } from 'lucide-react';
+import { UploadCloud, File, Trash2, Smartphone, Monitor, Send, CheckCircle2 } from 'lucide-react';
 import { formatBytes, DeviceInfo } from '@shareflow/shared';
 
 interface SendTabProps {
@@ -71,16 +71,16 @@ export const SendTab: React.FC<SendTabProps> = ({ pairedDevice, onSendFiles, onR
             color: pairedDevice ? 'var(--success)' : 'var(--primary)',
             flexShrink: 0,
           }}>
-            <Smartphone size={22} />
+            {pairedDevice?.type === 'computer' ? <Monitor size={22} /> : <Smartphone size={22} />}
           </div>
           <div>
             <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--text-main)' }}>
-              {pairedDevice ? `متصل بـ: ${pairedDevice.name}` : 'غير مقترن بهاتف بعد'}
+              {pairedDevice ? `متصل بـ: ${pairedDevice.name}` : 'غير مقترن بجهاز بعد'}
             </div>
             <div style={{ fontSize: 13, color: 'var(--text-secondary)' }}>
               {pairedDevice
                 ? 'الجهاز جاهز لاستقبال الملفات بأقصى سرعة للشبكة المحلية'
-                : 'أدخل رمز الـ PIN الظاهر على شاشة هاتفك للاقتران فوراً'}
+                : 'أدخل رمز الـ PIN الظاهر على الجهاز الآخر (كمبيوتر أو هاتف) للاقتران فوراً'}
             </div>
           </div>
         </div>

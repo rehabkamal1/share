@@ -72,10 +72,10 @@ export const ReceiveTab: React.FC<ReceiveTabProps> = ({ myDetails, pairedDevice 
     <div style={{ maxWidth: 760, margin: '0 auto', textAlign: 'center' }}>
       <div className="responsive-card">
         <h2 style={{ fontSize: 22, fontWeight: 800, color: 'var(--text-main)', marginBottom: 8 }}>
-          استلام الملفات من الهاتف على الكمبيوتر
+          استلام الملفات على هذا الكمبيوتر
         </h2>
-        <p style={{ fontSize: 14, color: 'var(--text-secondary)', maxWidth: 540, margin: '0 auto 24px', lineHeight: 1.5 }}>
-          افتح تطبيق CloudShare على هاتفك، اختر "ربط مع الكمبيوتر" ثم امسح رمز الـ QR أدناه أو اكتب كود الـ PIN.
+        <p style={{ fontSize: 14, color: 'var(--text-secondary)', maxWidth: 580, margin: '0 auto 24px', lineHeight: 1.5 }}>
+          لاستلام ملفات من كمبيوتر آخر أو من الهاتف: اكتب كود الـ PIN أدناه في خانة الإرسال بالجهاز الآخر، أو امسح رمز الـ QR من تطبيق الهاتف.
         </p>
 
         {pairedDevice ? (
@@ -307,16 +307,16 @@ export const ReceiveTab: React.FC<ReceiveTabProps> = ({ myDetails, pairedDevice 
           textAlign: 'right',
         }}>
           <div style={{ padding: 12 }}>
-            <div style={{ color: 'var(--primary)', fontWeight: 800, fontSize: 16, marginBottom: 4 }}>١. على الهاتف</div>
-            <p style={{ fontSize: 13, color: 'var(--text-secondary)' }}>اضغط على أيقونة "ربط مع الكمبيوتر" في الصفحة الرئيسية لتطبيق الهاتف.</p>
+            <div style={{ color: 'var(--primary)', fontWeight: 800, fontSize: 16, marginBottom: 4 }}>١. على الجهاز المرسل</div>
+            <p style={{ fontSize: 13, color: 'var(--text-secondary)' }}>افتح CloudShare على كمبيوتر آخر أو على هاتفك، واختر تبويب "إرسال ملفات".</p>
           </div>
           <div style={{ padding: 12 }}>
-            <div style={{ color: 'var(--primary)', fontWeight: 800, fontSize: 16, marginBottom: 4 }}>٢. المسح والاقتران</div>
-            <p style={{ fontSize: 13, color: 'var(--text-secondary)' }}>وجّه الكاميرا نحو رمز الـ QR أو اكتب رمز الـ PIN الموضح أعلاه.</p>
+            <div style={{ color: 'var(--primary)', fontWeight: 800, fontSize: 16, marginBottom: 4 }}>٢. الاقتران السريع</div>
+            <p style={{ fontSize: 13, color: 'var(--text-secondary)' }}>اكتب كود الـ PIN الموضح أعلاه في الجهاز المرسل (أو امسح رمز الـ QR بكاميرا الهاتف).</p>
           </div>
           <div style={{ padding: 12 }}>
             <div style={{ color: 'var(--primary)', fontWeight: 800, fontSize: 16, marginBottom: 4 }}>٣. الاستلام التلقائي</div>
-            <p style={{ fontSize: 13, color: 'var(--text-secondary)' }}>عند إرسال الملفات ستصل فوراً إلى متصفحك وتُحفظ في مجلد التنزيلات.</p>
+            <p style={{ fontSize: 13, color: 'var(--text-secondary)' }}>عند إرسال الملفات ستصل فوراً إلى هذا الجهاز وتُحفظ تلقائياً في مجلد التنزيلات.</p>
           </div>
         </div>
       </div>

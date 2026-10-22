@@ -14,7 +14,7 @@ export const Hero: React.FC = () => {
       </h1>
 
       <p className="hero-desc">
-        انقل الصور والفيديوهات والمستندات الضخمة بين هاتفك الأندرويد والكمبيوتر مباشرة عبر الشبكة المحلية، أو أنشئ روابط مؤقتة مشفرة تشاركها عن بعد.
+        انقل الصور والفيديوهات والمستندات الضخمة بين أجهزة الكمبيوتر والهواتف مباشرة عبر الشبكة المحلية (Wi-Fi)، أو أنشئ روابط مؤقتة مشفرة تشاركها عن بعد.
       </p>
 
       <div style={{
@@ -26,9 +26,9 @@ export const Hero: React.FC = () => {
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-main)', fontSize: 13, fontWeight: 600 }}>
           <div style={{ width: 26, height: 26, borderRadius: 8, background: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Smartphone size={15} color="var(--primary)" />
+            <Monitor size={15} color="var(--primary)" />
           </div>
-          <span>هاتف أندرويد</span>
+          <span>كمبيوتر</span>
         </div>
 
         <span style={{ color: 'var(--primary)', fontWeight: 700 }}>⇄</span>
@@ -37,7 +37,16 @@ export const Hero: React.FC = () => {
           <div style={{ width: 26, height: 26, borderRadius: 8, background: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Monitor size={15} color="var(--primary)" />
           </div>
-          <span>متصفح الكمبيوتر</span>
+          <span>كمبيوتر آخر</span>
+        </div>
+
+        <span style={{ color: 'var(--primary)', fontWeight: 700 }}>⇄</span>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-main)', fontSize: 13, fontWeight: 600 }}>
+          <div style={{ width: 26, height: 26, borderRadius: 8, background: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Smartphone size={15} color="var(--primary)" />
+          </div>
+          <span>هاتف أندرويد</span>
         </div>
 
         <div className="hide-on-mobile" style={{ width: 1, height: 16, background: 'var(--border)' }} />

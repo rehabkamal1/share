@@ -124,8 +124,8 @@ export const App: React.FC = () => {
   };
 
   const tabs = [
-    { id: 'send', label: 'إرسال إلى الهاتف', icon: Send },
-    { id: 'receive', label: 'استلام من الهاتف', icon: Download },
+    { id: 'send', label: 'إرسال ملفات (لهاتف / كمبيوتر)', icon: Send },
+    { id: 'receive', label: 'استلام ملفات (من هاتف / كمبيوتر)', icon: Download },
     { id: 'cloud', label: 'مشاركة عبر رابط مشفر', icon: Link2 },
     { id: 'download', label: 'تحميل عبر رابط', icon: FolderDown },
   ] as const;
