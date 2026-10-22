@@ -154,10 +154,10 @@ export const ReceiveTab: React.FC<ReceiveTabProps> = ({ myDetails, pairedDevice 
                 justifyContent: 'space-between',
               }}>
                 <span style={{
-                  fontSize: 28,
+                  fontSize: 'clamp(22px, 6vw, 28px)',
                   fontWeight: 800,
                   color: 'var(--primary-dark)',
-                  letterSpacing: 4,
+                  letterSpacing: 'clamp(2px, 1.5vw, 4px)',
                   fontFamily: 'monospace',
                 }}>
                   {myDetails.pin}
@@ -201,15 +201,16 @@ export const ReceiveTab: React.FC<ReceiveTabProps> = ({ myDetails, pairedDevice 
         {/* LAN IP Config Box */}
         <div style={{
           margin: '16px auto 0',
-          padding: '12px 18px',
+          padding: '12px 14px',
           borderRadius: 14,
           background: '#f8f9fe',
           border: '1px solid #e2e8f0',
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
-          gap: 8,
+          alignItems: 'stretch',
+          gap: 10,
           maxWidth: 500,
+          width: '100%',
         }}>
           <div style={{
             display: 'flex',
@@ -218,30 +219,34 @@ export const ReceiveTab: React.FC<ReceiveTabProps> = ({ myDetails, pairedDevice 
             width: '100%',
             fontSize: 13,
             color: 'var(--text-secondary)',
+            flexWrap: 'wrap',
+            gap: 8,
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <Wifi size={16} color="var(--primary)" />
-              <span>عنوان اللابتوب في الشبكة (LAN IP):</span>
-              <strong style={{ color: 'var(--text-main)', direction: 'ltr' }}>
-                {customIp || (typeof window !== 'undefined' && isLocalHostname(window.location.hostname) ? window.location.hostname : 'لم يتم التحديد')}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+              <Wifi size={16} color="var(--primary)" style={{ flexShrink: 0 }} />
+              <span>عنوان IP اللابتوب:</span>
+              <strong style={{ color: 'var(--text-main)', direction: 'ltr', wordBreak: 'break-all' }}>
+                {customIp || (typeof window !== 'undefined' && isLocalHostname(window.location.hostname) ? window.location.hostname : 'لم يُحدد')}
               </strong>
             </div>
             <button
               onClick={() => setShowIpConfig(!showIpConfig)}
               style={{
-                background: 'none',
+                background: '#f0eefa',
                 border: 'none',
-                color: 'var(--primary)',
+                color: 'var(--primary-dark)',
                 fontWeight: 700,
                 cursor: 'pointer',
-                display: 'flex',
+                display: 'inline-flex',
                 alignItems: 'center',
                 gap: 4,
                 fontSize: 12,
+                padding: '4px 10px',
+                borderRadius: 8,
               }}
             >
-              <Settings2 size={14} />
-              <span>{showIpConfig ? 'إغلاق' : 'تعديل الـ IP'}</span>
+              <Settings2 size={13} />
+              <span>{showIpConfig ? 'إلغاء' : 'تعديل IP'}</span>
             </button>
           </div>
 
@@ -261,20 +266,21 @@ export const ReceiveTab: React.FC<ReceiveTabProps> = ({ myDetails, pairedDevice 
           )}
 
           {showIpConfig && (
-            <div style={{ width: '100%', display: 'flex', gap: 8, marginTop: 6 }}>
+            <div style={{ width: '100%', display: 'flex', gap: 8, flexWrap: 'wrap' }}>
               <input
                 type="text"
                 placeholder="مثال: 192.168.1.15"
                 value={tempIp}
                 onChange={(e) => setTempIp(e.target.value)}
                 style={{
-                  flex: 1,
+                  flex: '1 1 180px',
                   padding: '8px 12px',
                   borderRadius: 8,
                   border: '1px solid #cbd5e1',
                   direction: 'ltr',
                   textAlign: 'center',
                   fontSize: 13,
+                  minWidth: 0,
                 }}
               />
               <button
@@ -288,6 +294,7 @@ export const ReceiveTab: React.FC<ReceiveTabProps> = ({ myDetails, pairedDevice 
                   fontWeight: 700,
                   fontSize: 13,
                   cursor: 'pointer',
+                  flexShrink: 0,
                 }}
               >
                 تطبيق

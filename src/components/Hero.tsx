@@ -21,39 +21,67 @@ export const Hero: React.FC = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: '16px',
+        gap: '10px',
         flexWrap: 'wrap',
+        margin: '0 auto',
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-main)', fontSize: 13, fontWeight: 600 }}>
-          <div style={{ width: 26, height: 26, borderRadius: 8, background: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Monitor size={15} color="var(--primary)" />
-          </div>
+        <div style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 6,
+          padding: '6px 12px',
+          borderRadius: 20,
+          background: '#ffffff',
+          color: 'var(--text-main)',
+          fontSize: 12,
+          fontWeight: 700,
+          boxShadow: '0 2px 6px rgba(0,0,0,0.04)',
+        }}>
+          <Monitor size={14} color="var(--primary)" />
           <span>كمبيوتر</span>
         </div>
 
-        <span style={{ color: 'var(--primary)', fontWeight: 700 }}>⇄</span>
+        <span style={{ color: 'var(--primary)', fontWeight: 800 }}>⇄</span>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-main)', fontSize: 13, fontWeight: 600 }}>
-          <div style={{ width: 26, height: 26, borderRadius: 8, background: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Monitor size={15} color="var(--primary)" />
-          </div>
+        <div style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 6,
+          padding: '6px 12px',
+          borderRadius: 20,
+          background: '#ffffff',
+          color: 'var(--text-main)',
+          fontSize: 12,
+          fontWeight: 700,
+          boxShadow: '0 2px 6px rgba(0,0,0,0.04)',
+        }}>
+          <Monitor size={14} color="var(--primary)" />
           <span>كمبيوتر آخر</span>
         </div>
 
-        <span style={{ color: 'var(--primary)', fontWeight: 700 }}>⇄</span>
+        <span style={{ color: 'var(--primary)', fontWeight: 800 }}>⇄</span>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-main)', fontSize: 13, fontWeight: 600 }}>
-          <div style={{ width: 26, height: 26, borderRadius: 8, background: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Smartphone size={15} color="var(--primary)" />
-          </div>
+        <div style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 6,
+          padding: '6px 12px',
+          borderRadius: 20,
+          background: '#ffffff',
+          color: 'var(--text-main)',
+          fontSize: 12,
+          fontWeight: 700,
+          boxShadow: '0 2px 6px rgba(0,0,0,0.04)',
+        }}>
+          <Smartphone size={14} color="var(--primary)" />
           <span>هاتف أندرويد</span>
         </div>
 
         <div className="hide-on-mobile" style={{ width: 1, height: 16, background: 'var(--border)' }} />
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--success)', fontSize: 13, fontWeight: 600 }}>
-          <Shield size={15} />
-          <span>ملفاتك لا تُرفع لأي خادم أثناء النقل المحلي</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--success)', fontSize: 12, fontWeight: 700 }}>
+          <Shield size={14} />
+          <span>نقل محلي مشفر 100%</span>
         </div>
       </div>
     </div>

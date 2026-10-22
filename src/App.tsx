@@ -124,10 +124,10 @@ export const App: React.FC = () => {
   };
 
   const tabs = [
-    { id: 'send', label: 'إرسال ملفات (لهاتف / كمبيوتر)', icon: Send },
-    { id: 'receive', label: 'استلام ملفات (من هاتف / كمبيوتر)', icon: Download },
-    { id: 'cloud', label: 'مشاركة عبر رابط مشفر', icon: Link2 },
-    { id: 'download', label: 'تحميل عبر رابط', icon: FolderDown },
+    { id: 'send', shortLabel: 'إرسال ملفات', fullLabel: 'إرسال ملفات (لهاتف / كمبيوتر)', icon: Send },
+    { id: 'receive', shortLabel: 'استلام ملفات', fullLabel: 'استلام ملفات (من هاتف / كمبيوتر)', icon: Download },
+    { id: 'cloud', shortLabel: 'مشاركة برابط', fullLabel: 'مشاركة عبر رابط مشفر', icon: Link2 },
+    { id: 'download', shortLabel: 'تحميل برابط', fullLabel: 'تحميل عبر رابط', icon: FolderDown },
   ] as const;
 
   return (
@@ -158,7 +158,8 @@ export const App: React.FC = () => {
                 }}
               >
                 <Icon size={18} style={tab.id === 'send' ? { transform: 'rotate(-45deg)' } : undefined} />
-                <span>{tab.label}</span>
+                <span className="tab-label-full">{tab.fullLabel}</span>
+                <span className="tab-label-short">{tab.shortLabel}</span>
               </button>
             );
           })}
