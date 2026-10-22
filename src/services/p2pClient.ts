@@ -18,6 +18,14 @@ export type IncomingTransferCallback = (
   reject: () => void
 ) => void;
 
+const getDefaultWsUrl = () => {
+  if (typeof window !== 'undefined' && window.location.hostname) {
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    return `${protocol}//${window.location.hostname}:4000/ws/signaling`;
+  }
+  return 'ws://localhost:4000/ws/signaling';
+};
+
 export class P2PTransferEngine {
   private ws: WebSocket | null = null;
   private peerConnection: RTCPeerConnection | null = null;
@@ -25,7 +33,7 @@ export class P2PTransferEngine {
   private peerId: string = 'web_' + Math.random().toString(36).substring(2, 9);
   private myPin: string = generatePinCode();
   private pairedPeerId: string | null = null;
-  private wsUrl: string = 'ws://localhost:4000/ws/signaling';
+  private wsUrl: string = getDefaultWsUrl();
   private isConnectedToHub: boolean = false;
 
   // Active transfer state
@@ -53,6 +61,20 @@ export class P2PTransferEngine {
   public init(customWsUrl?: string) {
     if (customWsUrl) this.wsUrl = customWsUrl;
     this.connectSignaling();
+  }
+
+  public setHubUrl(url: string) {
+    this.wsUrl = url;
+    if (this.ws) {
+      try {
+        this.ws.close();
+      } catch {}
+    }
+    this.connectSignaling();
+  }
+
+  public getHubUrl(): string {
+    return this.wsUrl;
   }
 
   public getMyDetails() {

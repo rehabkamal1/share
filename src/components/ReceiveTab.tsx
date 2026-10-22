@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import { QRPairingPayload, DeviceInfo } from '@shareflow/shared';
-import { Smartphone, CheckCircle, Copy, Check } from 'lucide-react';
+import { Smartphone, CheckCircle, Copy, Check, Wifi, Settings2 } from 'lucide-react';
 
 interface ReceiveTabProps {
   myDetails: {
@@ -16,6 +16,20 @@ interface ReceiveTabProps {
 
 export const ReceiveTab: React.FC<ReceiveTabProps> = ({ myDetails, pairedDevice }) => {
   const [copied, setCopied] = useState(false);
+  const [customIp, setCustomIp] = useState(() => {
+    return (
+      localStorage.getItem('cloudshare_lan_ip') ||
+      (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1'
+        ? window.location.hostname
+        : '')
+    );
+  });
+  const [tempIp, setTempIp] = useState(customIp);
+  const [showIpConfig, setShowIpConfig] = useState(false);
+
+  const effectiveWsUrl = customIp.trim()
+    ? `ws://${customIp.trim()}:4000/ws/signaling`
+    : myDetails.wsUrl;
 
   // QR Payload conforming to CloudShare Protocol
   const qrPayload: QRPairingPayload = {
@@ -25,7 +39,7 @@ export const ReceiveTab: React.FC<ReceiveTabProps> = ({ myDetails, pairedDevice 
     name: myDetails.name,
     deviceType: 'computer',
     pin: myDetails.pin,
-    wsUrl: myDetails.wsUrl,
+    wsUrl: effectiveWsUrl,
     token: myDetails.id,
   };
 
@@ -33,6 +47,13 @@ export const ReceiveTab: React.FC<ReceiveTabProps> = ({ myDetails, pairedDevice 
     navigator.clipboard.writeText(myDetails.pin);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleSaveIp = () => {
+    const trimmed = tempIp.trim();
+    setCustomIp(trimmed);
+    localStorage.setItem('cloudshare_lan_ip', trimmed);
+    setShowIpConfig(false);
   };
 
   return (
@@ -164,6 +185,89 @@ export const ReceiveTab: React.FC<ReceiveTabProps> = ({ myDetails, pairedDevice 
             </div>
           </div>
         )}
+
+        {/* LAN IP Config Box */}
+        <div style={{
+          margin: '16px auto 0',
+          padding: '12px 18px',
+          borderRadius: 14,
+          background: '#f8f9fe',
+          border: '1px solid #e2e8f0',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: 8,
+          maxWidth: 500,
+        }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            width: '100%',
+            fontSize: 13,
+            color: 'var(--text-secondary)',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <Wifi size={16} color="var(--primary)" />
+              <span>عنوان اللابتوب في الشبكة (LAN IP):</span>
+              <strong style={{ color: 'var(--text-main)', direction: 'ltr' }}>
+                {customIp || (typeof window !== 'undefined' ? window.location.hostname : 'localhost')}
+              </strong>
+            </div>
+            <button
+              onClick={() => setShowIpConfig(!showIpConfig)}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: 'var(--primary)',
+                fontWeight: 700,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 4,
+                fontSize: 12,
+              }}
+            >
+              <Settings2 size={14} />
+              <span>{showIpConfig ? 'إغلاق' : 'تعديل الـ IP'}</span>
+            </button>
+          </div>
+
+          {showIpConfig && (
+            <div style={{ width: '100%', display: 'flex', gap: 8, marginTop: 6 }}>
+              <input
+                type="text"
+                placeholder="مثال: 192.168.1.15"
+                value={tempIp}
+                onChange={(e) => setTempIp(e.target.value)}
+                style={{
+                  flex: 1,
+                  padding: '8px 12px',
+                  borderRadius: 8,
+                  border: '1px solid #cbd5e1',
+                  direction: 'ltr',
+                  textAlign: 'center',
+                  fontSize: 13,
+                }}
+              />
+              <button
+                onClick={handleSaveIp}
+                style={{
+                  padding: '8px 16px',
+                  borderRadius: 8,
+                  background: 'var(--primary)',
+                  color: '#ffffff',
+                  border: 'none',
+                  fontWeight: 700,
+                  fontSize: 13,
+                  cursor: 'pointer',
+                }}
+              >
+                تطبيق
+              </button>
+            </div>
+          )}
+        </div>
 
         {/* Steps Guide */}
         <div style={{

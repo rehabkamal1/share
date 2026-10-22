@@ -28,8 +28,16 @@ export interface ShareMetadataResponse {
   maxDownloads: number;
 }
 
+const getDefaultApiUrl = () => {
+  if (typeof window !== 'undefined' && window.location.hostname) {
+    const protocol = window.location.protocol === 'https:' ? 'https:' : 'http:';
+    return `${protocol}//${window.location.hostname}:4000/api`;
+  }
+  return 'http://localhost:4000/api';
+};
+
 export class CloudShareApiClient {
-  private static baseUrl = 'http://localhost:4000/api';
+  private static baseUrl = getDefaultApiUrl();
 
   static setBaseUrl(url: string) {
     this.baseUrl = url;
