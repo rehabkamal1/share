@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { UploadCloud, File, Trash2, Smartphone, Monitor, Send, CheckCircle2 } from 'lucide-react';
+import { UploadCloud, File, Trash2, Smartphone, Monitor, Send, CheckCircle2, FolderUp } from 'lucide-react';
 import { formatBytes, DeviceInfo } from '@shareflow/shared';
 
 interface SendTabProps {
@@ -13,6 +13,7 @@ export const SendTab: React.FC<SendTabProps> = ({ pairedDevice, onSendFiles, onR
   const [targetPin, setTargetPin] = useState('');
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const folderInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -151,6 +152,14 @@ export const SendTab: React.FC<SendTabProps> = ({ pairedDevice, onSendFiles, onR
           multiple
           style={{ display: 'none' }}
         />
+        <input
+          type="file"
+          ref={folderInputRef}
+          onChange={handleFileChange}
+          {...({ webkitdirectory: '', directory: '' } as any)}
+          multiple
+          style={{ display: 'none' }}
+        />
         <div style={{
           width: 56,
           height: 56,
@@ -168,8 +177,58 @@ export const SendTab: React.FC<SendTabProps> = ({ pairedDevice, onSendFiles, onR
           اضغط لاختيار الملفات أو اسحبها وأفلتها هنا
         </h3>
         <p style={{ fontSize: 13, color: 'var(--text-secondary)' }}>
-          يدعم جميع الصور، الفيديوهات عالية الدقة، المستندات، والملفات المضغوطة
+          يدعم جميع الصور، الفيديوهات عالية الدقة، المستندات، والمجلدات الكاملة
         </p>
+      </div>
+
+      {/* Quick Selection Shortcuts (Files vs Whole Folder) */}
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 12,
+        marginTop: 14,
+        flexWrap: 'wrap',
+      }}>
+        <button
+          type="button"
+          onClick={() => fileInputRef.current?.click()}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 6,
+            padding: '9px 18px',
+            borderRadius: 'var(--radius-button)',
+            background: 'var(--secondary-surface)',
+            color: 'var(--primary-dark)',
+            fontSize: 13,
+            fontWeight: 700,
+            border: '1px solid var(--border)',
+          }}
+        >
+          <UploadCloud size={16} />
+          <span>اختيار ملفات متعددة</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => folderInputRef.current?.click()}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 6,
+            padding: '9px 18px',
+            borderRadius: 'var(--radius-button)',
+            background: 'var(--accent-mint)',
+            color: 'var(--success)',
+            fontSize: 13,
+            fontWeight: 700,
+            border: '1px solid #c3ecd7',
+          }}
+        >
+          <FolderUp size={16} />
+          <span>اختيار مجلد كامل (بكل محتوياته دفعة واحدة)</span>
+        </button>
       </div>
 
       {/* Selected Files Preview */}
@@ -186,8 +245,26 @@ export const SendTab: React.FC<SendTabProps> = ({ pairedDevice, onSendFiles, onR
             <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--text-main)' }}>
               الملفات المختارة ({selectedFiles.length})
             </div>
-            <div style={{ fontSize: 13, color: 'var(--primary-dark)', fontWeight: 600 }}>
-              الحجم الإجمالي: {formatBytes(totalBytes)}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <div style={{ fontSize: 13, color: 'var(--primary-dark)', fontWeight: 600 }}>
+                الحجم الإجمالي: {formatBytes(totalBytes)}
+              </div>
+              <button
+                type="button"
+                onClick={() => setSelectedFiles([])}
+                style={{
+                  background: '#FEE2E2',
+                  color: 'var(--error)',
+                  padding: '4px 10px',
+                  borderRadius: 8,
+                  fontSize: 12,
+                  fontWeight: 600,
+                  border: 'none',
+                  cursor: 'pointer',
+                }}
+              >
+                مسح الكل
+              </button>
             </div>
           </div>
 
